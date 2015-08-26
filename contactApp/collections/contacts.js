@@ -1,0 +1,1 @@
+Contacts = new Mongo.collection('contact');
