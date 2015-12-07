@@ -1,1 +1,1 @@
-Contacts = new Mongo.collection('contact');
+Contacts = new Mongo.Collection('contact');
