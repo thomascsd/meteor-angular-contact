@@ -16,14 +16,15 @@ Meteor.methods({
     },
     'updateContact': function(contact) {
         check(contact, {
-            contactName: String,
+            id: String,
+            name: String,
             email: String,
             age: Number
         });
 
         Contacts.update(contact.id, {
             $set: {
-                name: contact.contactName,
+                name: contact.name,
                 email: contact.email,
                 age: contact.age
             }

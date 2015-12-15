@@ -2,22 +2,37 @@ var contactApp = angular.module('contactApp');
 
 contactApp.controller('contactController', ['$scope', '$meteor', function($scope, $meteor) {
 
-    $scope.contacts = $meteor.collection(Contacts).subscribe('contact');
-    $scope.editZone = false;
+    $scope.contacts = $meteor.collection(Contacts, false).subscribe('contact');
+    $scope.editContact = null;
 
     $scope.add = function(e, contact) {
         e.preventDefault();
         $meteor.call('insertContact', contact);
-        //$scope.contacts.save(contact);
     };
 
     $scope.update = function(e, contact) {
         e.preventDefault();
-        $meteor.call('updateContact', contact);
+        $meteor.call('updateContact', {
+                id: contact._id,
+                name: contact.name,
+                email: contact.email,
+                age: contact.age
+            })
+            .then(() => contact.editZone = false);
     };
 
-    $scope.edit = function() {
-        this.editZone = true;
+    $scope.edit = function(contact) {
+        $scope.editContact = contact;
+
+        //contact.editZone = true;
+        angular.forEach($scope.contacts, function(item) {
+            if (contact._id === item._id) {
+                item.editZone = true;
+            }
+            else {
+                item.editZone = false;
+            }
+        });
     };
 
 }]);

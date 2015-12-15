@@ -1,24 +1,25 @@
 <div ng-controller="contactController">
-    <ul>
-        <li ng-repeat="ct in contacts">
-            <div ng-show="!editZone">
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="ct in contacts">
+            <div ng-show="!ct.editZone">
                 {{ct.name}} - {{ct.email}}
                 <br>
-                <input type="button" id="edit" value="Edit" ng-click="edit()" class="btn btn-primary" />
+                <input type="button" id="edit" value="Edit" ng-click="edit(ct)" class="btn btn-primary" />
             </div>
-            <div ng-show="editZone">
-                <form action="#" method="post" ng-submit="update($event, editContact)">
+            <div ng-show="ct.editZone">
+                <form action="#" method="post" class="" ng-submit="update($event, editContact)">
+                    <input type="hidden" name="contactId" id="contactId" ng-model="editContact._id" />
                     <div class="form-group">
-                        <label for="contactName">Name</label>
-                        <input type="text" name="contactName" id="contactName" ng-model="editContact.contactName" />
+                        <label for="contactName" class="control-label">Name</label>
+                        <input type="text" name="contactName" id="contactName" ng-model="editContact.name"  />
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" ng-model="editContact.email" />
+                        <input type="text" name="email" id="email" ng-model="editContact.email"  />
                     </div>
                     <div class="form-group">
                         <label for="age">Age</label>
-                        <input type="number" name="age" id="age" ng-model="editContact.age" />
+                        <input type="number" name="age" id="age" ng-model="editContact.age"  />
                     </div>
                     <div class="form-group">
                         <input type="submit" value="Update contact" class="btn btn-primary" />
@@ -32,16 +33,16 @@
 
     <form action="#" method="post" ng-submit="add($event, contact)">
         <div class="form-group">
-            <label for="contactName">Name</label>
-            <input type="text" name="contactName" id="contactName" ng-model="contact.contactName" />
+            <label for="contactName" >Name</label>
+            <input type="text" name="contactName" id="contactName" class="form-control" ng-model="contact.contactName" />
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="text" name="email" id="email" ng-model="contact.email" />
+            <input type="text" name="email" id="email" class="form-control" ng-model="contact.email" />
         </div>
         <div class="form-group">
             <label for="age">Age</label>
-            <input type="number" name="age" id="age" ng-model="contact.age" />
+            <input type="number" name="age" id="age" class="form-control" ng-model="contact.age" />
         </div>
         <div class="form-group">
             <input type="submit" value="Add contact" class="btn btn-primary" />
