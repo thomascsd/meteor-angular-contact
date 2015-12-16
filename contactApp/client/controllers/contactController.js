@@ -1,9 +1,12 @@
 var contactApp = angular.module('contactApp');
 
 contactApp.controller('contactController', ['$scope', '$meteor', function($scope, $meteor) {
-
-    $scope.contacts = $meteor.collection(Contacts, false).subscribe('contact');
     $scope.editContact = null;
+
+    $scope.subscribe('contact');
+    $scope.helpers({
+        contacts: () => Contacts.find({})
+    });
 
     $scope.add = function(e, contact) {
         e.preventDefault();
