@@ -1,7 +1,11 @@
 <div ng-controller="contactController">
+    <section class="input-group">
+        <span class="glyphicon glyphicon-search input-group-addon"></span>
+        <input type="text" name="query" id="query" class="form-control" placeholder="Search for..." ng-model="queryText"/>
+    </section>
     <section>
         <ul class="list-group">
-            <li class="list-group-item" ng-repeat="ct in contacts">
+            <li class="list-group-item" ng-repeat="ct in contacts | filter: queryText">
                 <div ng-show="!ct.editZone">
                     <p>
                         {{ct.name}} - {{ct.email}}
@@ -9,7 +13,7 @@
                     <input type="button" id="edit" value="Edit" ng-click="edit(ct)" class="btn btn-primary" />
                 </div>
                 <div ng-show="ct.editZone">
-                    <form action="#" method="post" class="" ng-submit="update($event, editContact)">
+                    <form action="#" method="post" class="form-horizontal" ng-submit="update($event, editContact)">
                         <input type="hidden" name="contactId" id="contactId" ng-model="editContact._id" />
                         <div class="form-group">
                             <label for="contactName" class="control-label col-sm-2">Name</label>
