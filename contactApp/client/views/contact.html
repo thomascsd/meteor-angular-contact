@@ -1,7 +1,7 @@
 <div ng-controller="contactController">
     <section class="input-group">
         <span class="glyphicon glyphicon-search input-group-addon"></span>
-        <input type="text" name="query" id="query" class="form-control" placeholder="Search for..." ng-model="queryText"/>
+        <input type="text" name="query" id="query" class="form-control" placeholder="Search for..." ng-model="queryText" />
     </section>
     <section>
         <ul class="list-group">
@@ -43,26 +43,33 @@
         </ul>
     </section>
     <section>
-        <form action="#" method="post" ng-submit="add($event, contact)">
-            <div class="form-group">
+        <form action="#" method="post" name="contactForm" ng-submit="add($event, contact)" novalidate>
+            <div class="form-group" ng-class="{'has-error': contactForm.contactName.$touched && contactForm.contactName.$invalid}">
                 <label for="contactName">Name</label>
-                <input type="text" name="contactName" id="contactName" class="form-control" ng-model="contact.contactName" />
+                <input type="text" name="contactName" id="contactName" class="form-control" ng-model="contact.contactName" required />
+                <div class="help-block" ng-messages="contactForm.contactName.$error" ng-show="contactForm.contactName.$touched">
+                    <span ng-message="required">Contact name is required</span>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': contactForm.email.$touched && contactForm.email.$invalid}">
                 <label for="email">Email</label>
-                <input type="text" name="email" id="email" class="form-control" ng-model="contact.email" />
+                <input type="email" name="email" id="email" class="form-control" ng-model="contact.email" required />
+                <div class="help-block" ng-messages="contactForm.email.$error" ng-show="contactForm.email.$touched">
+                    <span ng-message="required">Email is required</span>
+                    <span ng-message="email">Emial is invalid</span>
+                </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{'has-error': contactForm.age.$touched && contactForm.age.$invalid}">
                 <label for="age">Age</label>
-                <input type="number" name="age" id="age" class="form-control" ng-model="contact.age" />
+                <input type="number" name="age" id="age" class="form-control" ng-model="contact.age" required />
+                <div class="help-block" ng-messages="contactForm.age.$error" ng-show="contactForm.age.$touched">
+                    <span ng-message="required">Age is required</span>
+                </div>
             </div>
             <div class="form-group">
-                <input type="submit" value="Add contact" class="btn btn-primary" />
+                <input type="submit" value="Add contact" class="btn btn-primary" ng-disabled="contactForm.$invalid" />
             </div>
         </form>
 
     </section>
-
-
-
 </div>

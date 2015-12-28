@@ -1,8 +1,7 @@
 var contactApp = angular.module('contactApp');
 
 contactApp.controller('contactController', ['$scope', '$meteor', function($scope, $meteor) {
-    $scope.editContact = null;
-
+    $scope.contact = {};
     $scope.subscribe('contact');
     $scope.helpers({
         contacts: () => Contacts.find({})
@@ -10,7 +9,10 @@ contactApp.controller('contactController', ['$scope', '$meteor', function($scope
 
     $scope.add = function(e, contact) {
         e.preventDefault();
-        $meteor.call('insertContact', contact);
+        $meteor.call('insertContact', contact)
+            .then(() => {
+                $scope.contact = null;
+            });
     };
 
     $scope.update = function(e, contact) {

@@ -1,1 +1,1 @@
-angular.module('contactApp', ['angular-meteor']);
+angular.module('contactApp', ['angular-meteor', 'ngMessages']);
