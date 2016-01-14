@@ -1,6 +1,6 @@
 var contactApp = angular.module('contactApp');
 
-contactApp.controller('contactController', ['$scope', '$meteor', function($scope, $meteor) {
+contactApp.controller('contactController', ['$scope', function($scope) {
     $scope.contact = {};
     $scope.subscribe('contact');
     $scope.helpers({
@@ -9,21 +9,22 @@ contactApp.controller('contactController', ['$scope', '$meteor', function($scope
 
     $scope.add = function(e, contact) {
         e.preventDefault();
-        $meteor.call('insertContact', contact)
-            .then(() => {
-                $scope.contact = null;
-            });
+        Meteor.call('insertContact', contact, (error) => {
+            $scope.contact = null;
+        });
     };
 
     $scope.update = function(e, contact) {
         e.preventDefault();
-        $meteor.call('updateContact', {
-                id: contact._id,
-                name: contact.name,
-                email: contact.email,
-                age: contact.age
-            })
-            .then(() => contact.editZone = false);
+        Meteor.call('updateContact', {
+            id: contact._id,
+            name: contact.name,
+            email: contact.email,
+            age: contact.age
+        }, (error) => {
+            contact.editZone = false
+        });
+
     };
 
     $scope.edit = function(contact) {

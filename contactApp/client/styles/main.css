@@ -1,3 +1,5 @@
-section{
+.contactList{
     margin-bottom:10px;
+    width:750px;
+    border: solid #B6B6B6 1px;
 }
