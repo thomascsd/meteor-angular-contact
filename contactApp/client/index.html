@@ -2,6 +2,15 @@
 
 </head>
 
-<body  ng-app="contactApp">
-    <div ng-include="'client/views/contact.html'"></div>
+<body layout="column" ng-app="contactApp">
+    <md-toolbar class="md-medium-tall" flex ng-controller="mainController">
+        <div class="md-toolbar-tools">
+            <h3>Contact</h3>
+            <span flex></span>
+            <md-button ng-click="openDialog()">
+                Login
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div flex ng-include="'client/views/contact.html'"></div>
 </body>

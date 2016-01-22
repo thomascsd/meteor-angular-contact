@@ -1,7 +1,10 @@
 <div layout="column" layout-align="center center" ng-controller="contactController">
     <md-content class="contactList" flex layout-padding>
-        <span class="glyphicon glyphicon-search input-group-addon"></span>
-        <input type="text" name="query" id="query" class="form-control" placeholder="Search for..." ng-model="queryText" />
+        <md-icon></md-icon>
+        <md-input-container>
+            <label for="query">Search for...</label>
+            <input type="text" name="query" id="query" ng-model="queryText" />
+        </md-input-container>
     </md-content>
     <md-content class="contactList" flex layout-padding>
         <md-list>
@@ -13,7 +16,7 @@
                     <p>
                         {{ct.email}}
                     </p>
-                    <md-button id="edit" class="md-raised md-accent" ng-click="edit(ct)">
+                    <md-button id="edit" class="md-raised md-primary" ng-click="edit(ct)">
                         Edit
                     </md-button>
                 </div>
@@ -33,7 +36,7 @@
                             <input type="number" name="age" id="age" class="form-control" ng-model="editContact.age" />
                         </md-input-container>
                         <md-input-container>
-                            <md-button type="submit" class="md-raised md-accent">
+                            <md-button type="submit" class="md-raised md-primary">
                                 Update contact
                             </md-button>
                         </md-input-container>
@@ -68,7 +71,7 @@
                 </div>
             </md-input-container>
             <md-input-container flex>
-                <md-button type="submit" class="md-raised md-accent" ng-disabled="contactForm.$invalid">
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="contactForm.$invalid">
                     Add contact
                 </md-button>
             </md-input-container>

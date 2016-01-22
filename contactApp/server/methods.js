@@ -13,6 +13,12 @@ Meteor.methods({
             email: contact.email,
             age: contact.age
         });
+
+        Accounts.createUser({
+            username: contact.contactName,
+            email: contact.email,
+            password: 'b12345'
+        });
     },
     'updateContact': function(contact) {
         check(contact, {

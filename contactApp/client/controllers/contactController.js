@@ -1,4 +1,5 @@
-var contactApp = angular.module('contactApp');
+'use strict';
+let contactApp = angular.module('contactApp');
 
 contactApp.controller('contactController', ['$scope', function($scope) {
     $scope.contact = {};
