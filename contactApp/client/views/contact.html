@@ -1,5 +1,5 @@
 <div layout="column" layout-align="center center" ng-controller="contactController">
-    <md-content class="contactList" flex layout-padding>
+    <md-content class="contactList" flex layout-padding ng-show="contacts.length > 0">
         <md-icon></md-icon>
         <md-input-container>
             <label for="query">Search for...</label>
@@ -16,7 +16,7 @@
                     <p>
                         {{ct.email}}
                     </p>
-                    <md-button id="edit" class="md-raised md-primary" ng-click="edit(ct)">
+                    <md-button id="edit" class="md-raised md-primary" ng-click="edit(ct)" ng-show="canEdit(ct)">
                         Edit
                     </md-button>
                 </div>
@@ -46,7 +46,7 @@
             </md-list-item>
         </md-list>
     </md-content>
-    <md-content class="contactList" flex layout-padding>
+    <md-content class="contactList" flex layout-padding ng-show="$auth.currentUser">
         <form action="#" method="post" name="contactForm" layout="column" ng-submit="add($event, contact)" novalidate>
             <md-input-container flex>
                 <label for="contactName">Name</label>
@@ -71,7 +71,7 @@
                 </div>
             </md-input-container>
             <md-input-container flex>
-                <md-button type="submit" class="md-raised md-primary" ng-disabled="contactForm.$invalid">
+                <md-button type="submit" class="md-raised md-primary" ng-disabled="!contactForm.$valid">
                     Add contact
                 </md-button>
             </md-input-container>

@@ -1,2 +1,2 @@
 'use strict';
-angular.module('contactApp', ['angular-meteor', 'ngMessages', 'ngMaterial', 'accounts.ui']);
+angular.module('contactApp', ['angular-meteor', 'angular-meteor.auth', 'ngMessages', 'ngMaterial']);

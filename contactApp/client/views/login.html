@@ -1,19 +1,28 @@
 <md-dialog aria-label="List dialog">
-    <form name="loginForm" ng-submit="login($event)">
+    <form name="loginForm" ng-submit="login($event, user)" novalidate>
         <md-dialog-content>
-            <div>
-                <md-input-container>
+            <md-content layout="column" layout-padding>
+                <h3 flex>
+                Login 
+                </h3>
+                <md-input-container flex>
                     <label for="username">User Name</label>
-                    <input type="text" id="username" name="username" />
+                    <input type="text" id="username" name="username" ng-model="user.username" required/>
+                    <div ng-messages="loginForm.username.$error">
+                        <span ng-message="required">Your username is required</span>
+                    </div>
                 </md-input-container>
                 <md-input-container>
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" />
+                    <input type="password" id="password" name="password" ng-model="user.password" required />
+                    <div ng-messages="loginForm.password.$error">
+                        <span ng-message="required">Your password is required</span>
+                    </div>
                 </md-input-container>
-            </div>
+            </md-content>
         </md-dialog-content>
         <md-dialog-actions>
-            <md-button type="submit" class="md-primary"></md-button>
+            <md-button type="submit" class="md-primary" ng-disabled="!loginForm.$valid">Login</md-button>
             <md-button ng-click="closeDialog()" class="md-primary">Close</md-button>
         </md-dialog-actions>
     </form>

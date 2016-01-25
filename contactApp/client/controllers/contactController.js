@@ -1,7 +1,7 @@
 'use strict';
 let contactApp = angular.module('contactApp');
 
-contactApp.controller('contactController', ['$scope', function($scope) {
+contactApp.controller('contactController', ['$scope', '$auth', function($scope, $auth) {
     $scope.contact = {};
     $scope.subscribe('contact');
     $scope.helpers({
@@ -41,5 +41,16 @@ contactApp.controller('contactController', ['$scope', function($scope) {
             }
         });
     };
+
+    $scope.canEdit = function(contact) {
+        const user = Meteor.user();
+        let sameUser = false;
+
+        if (user) {
+            sameUser = contact.name === user.username || user.username === 'admin';
+        }
+
+        return sameUser;
+    }
 
 }]);

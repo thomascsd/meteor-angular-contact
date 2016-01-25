@@ -3,7 +3,6 @@
 let app = angular.module('contactApp');
 
 app.controller('mainController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
-
     $scope.openDialog = function() {
         $mdDialog.show({
             templateUrl: 'client/views/login.html',
@@ -11,14 +10,19 @@ app.controller('mainController', ['$scope', '$mdDialog', function($scope, $mdDia
         });
     }
 
+    $scope.logout = function() {
+        Meteor.logout();
+    }
+
 }]);
 
 app.controller('loginController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
-    $scope.login = function(e) {
-
+    $scope.login = function(e, user) {
+        e.preventDefault();
+        Meteor.loginWithPassword(user.username, user.password, () => $mdDialog.hide());
     };
 
-    $scope.openDialog = function(e) {
+    $scope.closeDialog = function() {
         $mdDialog.hide();
     };
 }]);
