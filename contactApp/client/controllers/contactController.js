@@ -23,7 +23,7 @@ contactApp.controller('contactController', ['$scope', '$auth', function($scope, 
             email: contact.email,
             age: contact.age
         }, (error) => {
-            contact.editZone = false
+            contact.editZone = false;
         });
 
     };

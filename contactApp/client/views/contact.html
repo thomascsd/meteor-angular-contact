@@ -1,81 +1,87 @@
-<div layout="column" layout-align="center center" ng-controller="contactController">
-    <md-content class="contactList" flex layout-padding ng-show="contacts.length > 0">
-        <md-icon></md-icon>
-        <md-input-container>
-            <label for="query">Search for...</label>
-            <input type="text" name="query" id="query" ng-model="queryText" />
-        </md-input-container>
-    </md-content>
-    <md-content class="contactList" flex layout-padding>
-        <md-list>
-            <md-list-item ng-repeat="ct in contacts | filter: queryText">
-                <div class="md-list-item-text" ng-show="!ct.editZone">
-                    <h4>
-                        {{ct.name}}
-                    </h4>
-                    <p>
-                        {{ct.email}}
-                    </p>
-                    <md-button id="edit" class="md-raised md-primary" ng-click="edit(ct)" ng-show="canEdit(ct)">
-                        Edit
-                    </md-button>
-                </div>
-                <md-content ng-show="ct.editZone" layout-padding>
-                    <form action="#" method="post" ng-submit="update($event, editContact)">
-                        <input type="hidden" name="contactId" id="contactId" ng-model="editContact._id" />
-                        <md-input-container>
-                            <label for="contactName">Name</label>
-                            <input type="text" name="contactName" id="contactName" class="form-control" ng-model="editContact.name" />
-                        </md-input-container>
-                        <md-input-container>
-                            <label for="email">Email</label>
-                            <input type="text" name="email" id="email" class="form-control" ng-model="editContact.email" />
-                        </md-input-container>
-                        <md-input-container>
-                            <label for="age">Age</label>
-                            <input type="number" name="age" id="age" class="form-control" ng-model="editContact.age" />
-                        </md-input-container>
-                        <md-input-container>
-                            <md-button type="submit" class="md-raised md-primary">
-                                Update contact
+<div layout="row" layout-align="center center" ng-controller="contactController">
+    <md-content class="" flex="75" layout-padding>
+        <md-card ng-show="contacts.length > 0">
+            <md-card-content>
+                <md-icon md-font-set="fa" md-font-icon="fa fa-search"></md-icon>
+                <input type="text" name="query" id="query" placeholder="Search for..." ng-model="queryText" />
+            </md-card-content>
+        </md-card>
+        <md-card>
+            <md-card-content>
+                <md-list>
+                    <md-list-item ng-repeat="ct in contacts | filter: queryText">
+                        <div class="md-list-item-text" ng-show="!ct.editZone">
+                            <h4>{{ct.name}}</h4>
+                            <p>
+                                {{ct.email}}
+                            </p>
+                            <md-button id="edit" class="md-raised md-primary" ng-click="edit(ct)" ng-show="canEdit(ct)">
+                                Edit
                             </md-button>
-                        </md-input-container>
-                    </form>
-                </md-content>
-                <md-divider></md-divider>
-            </md-list-item>
-        </md-list>
-    </md-content>
-    <md-content class="contactList" flex layout-padding ng-show="$auth.currentUser">
-        <form action="#" method="post" name="contactForm" layout="column" ng-submit="add($event, contact)" novalidate>
-            <md-input-container flex>
-                <label for="contactName">Name</label>
-                <input type="text" name="contactName" id="contactName" class="form-control" ng-model="contact.contactName" required />
-                <div ng-messages="contactForm.contactName.$error">
-                    <span ng-message="required">Contact name is required</span>
-                </div>
-            </md-input-container>
-            <md-input-container flex>
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" ng-model="contact.email" required />
-                <div ng-messages="contactForm.email.$error">
-                    <span ng-message="required">Email is required</span>
-                    <span ng-message="email">Emial is invalid</span>
-                </div>
-            </md-input-container>
-            <md-input-container flex>
-                <label for="age">Age</label>
-                <input type="number" name="age" id="age" class="form-control" ng-model="contact.age" required />
-                <div ng-messages="contactForm.age.$error">
-                    <span ng-message="required">Age is required</span>
-                </div>
-            </md-input-container>
-            <md-input-container flex>
-                <md-button type="submit" class="md-raised md-primary" ng-disabled="!contactForm.$valid">
-                    Add contact
-                </md-button>
-            </md-input-container>
-        </form>
+                        </div>
+                        <md-content ng-show="ct.editZone" layout-padding>
+                            <form action="#" method="post" ng-submit="update($event, editContact)">
+                                <input type="hidden" name="contactId" id="contactId" ng-model="editContact._id" />
+                                <md-input-container>
+                                    <label for="contactName">Name</label>
+                                    <input type="text" name="contactName" id="contactName" class="form-control" ng-model="editContact.name" />
+                                </md-input-container>
+                                <md-input-container>
+                                    <label for="email">Email</label>
+                                    <input type="text" name="email" id="email" class="form-control" ng-model="editContact.email" />
+                                </md-input-container>
+                                <md-input-container>
+                                    <label for="age">Age</label>
+                                    <input type="number" name="age" id="age" class="form-control" ng-model="editContact.age" />
+                                </md-input-container>
+                                <md-input-container>
+                                    <md-button type="submit" class="md-raised md-primary">
+                                        Update contact
+                                    </md-button>
+                                </md-input-container>
+                            </form>
+                        </md-content>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+
+            </md-card-content>
+        </md-card>
+
+        <md-card ng-show="$auth.currentUser">
+            <md-card-content>
+                <form action="#" method="post" name="contactForm" layout="column" ng-submit="add($event, contact)" novalidate>
+                    <md-input-container flex>
+                        <label for="contactName">Name</label>
+                        <input type="text" name="contactName" id="contactName" class="form-control" ng-model="contact.contactName" required />
+                        <div ng-messages="contactForm.contactName.$error">
+                            <span ng-message="required">Contact name is required</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" id="email" class="form-control" ng-model="contact.email" required />
+                        <div ng-messages="contactForm.email.$error">
+                            <span ng-message="required">Email is required</span>
+                            <span ng-message="email">Emial is invalid</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <label for="age">Age</label>
+                        <input type="number" name="age" id="age" class="form-control" ng-model="contact.age" required />
+                        <div ng-messages="contactForm.age.$error">
+                            <span ng-message="required">Age is required</span>
+                        </div>
+                    </md-input-container>
+                    <md-input-container flex>
+                        <md-button type="submit" class="md-raised md-primary" ng-disabled="!contactForm.$valid">
+                            Add contact
+                        </md-button>
+                    </md-input-container>
+                </form>
+
+            </md-card-content>
+        </md-card>
 
     </md-content>
 </div>

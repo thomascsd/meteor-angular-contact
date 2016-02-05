@@ -1,5 +1,24 @@
-.contactList{
-    margin-bottom:10px;
-    width:750px;
+.contactList {
+    margin-bottom: 10px;
+    width: 750px;
     border: solid #B6B6B6 1px;
+}
+
+.header {
+    display: block;
+    position: relative;
+    font-size: 2em;
+}
+
+.card {
+    height: 400px;
+}
+
+.field {
+    display: block;
+    width: 80%;
+    margin: 25px auto;
+    top: 50px;
+    height: 300px;
+    position: relative;
 }

@@ -1,10 +1,8 @@
-<md-dialog aria-label="List dialog">
+<md-dialog aria-label="List dialog" class="">
     <form name="loginForm" ng-submit="login($event, user)" novalidate>
-        <md-dialog-content>
+        <md-dialog-content class="field">
             <md-content layout="column" layout-padding>
-                <h3 flex>
-                Login 
-                </h3>
+                <span class="header md-primary" flex>Login</span>
                 <md-input-container flex>
                     <label for="username">User Name</label>
                     <input type="text" id="username" name="username" ng-model="user.username" required/>
