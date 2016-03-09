@@ -2,7 +2,7 @@
 
 let contactApp = angular.module('contactApp');
 
-contactApp.directive('onlyUsername', function() {
+contactApp.directive('onlyusername', function() {
     return {
         restrict: 'A',
         require: 'ngModel',
@@ -11,11 +11,11 @@ contactApp.directive('onlyUsername', function() {
             
             ctrl.$validators.onlyUsername = function(modeValue, viewValue) {
                 if (viewValue) {
-                    var user = Contacts.findOne({
+                    var user = Contacts.find({
                         'name': viewValue
                     }).fetch();
 
-                    if (user) {
+                    if (user.length > 0) {
                         //Has same user
                         return false;
                     }
