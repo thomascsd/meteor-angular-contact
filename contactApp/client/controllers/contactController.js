@@ -1,21 +1,36 @@
 'use strict';
-let contactApp = angular.module('contactApp');
+/*global angular*/
+/*global contacts*/
 
-contactApp.controller('contactController', ['$scope', '$auth', function($scope, $auth) {
-    $scope.contact = {};
-    $scope.subscribe('contact');
-    $scope.helpers({
+angular
+    .module('contactApp')
+    .controller('contactController', contactController);
+
+contactController.$inject = ['$scope', '$auth', '$reactive'];
+
+function contactController($scope, $auth, $reactive) {
+    $reactive(this).attach($scope);
+    let vm = this;
+
+    vm.contact = {};
+    vm.subscribe('contact');
+    vm.helpers({
         contacts: () => Contacts.find({})
     });
 
-    $scope.add = function(e, contact) {
+    vm.add = add;
+    vm.update = update;
+    vm.edit = edit;
+    vm.canEdit = canEdit;
+
+    function add(e, contact) {
         e.preventDefault();
         Meteor.call('insertContact', contact, (error) => {
-            $scope.contact = null;
+            vm.contact = null;
         });
-    };
+    }
 
-    $scope.update = function(e, contact) {
+    function update(e, contact) {
         e.preventDefault();
         Meteor.call('updateContact', {
             id: contact._id,
@@ -26,13 +41,13 @@ contactApp.controller('contactController', ['$scope', '$auth', function($scope, 
             contact.editZone = false;
         });
 
-    };
+    }
 
-    $scope.edit = function(contact) {
-        $scope.editContact = contact;
+    function edit(contact) {
+        vm.editContact = contact;
 
         //contact.editZone = true;
-        angular.forEach($scope.contacts, function(item) {
+        angular.forEach(vm.contacts, function(item) {
             if (contact._id === item._id) {
                 item.editZone = true;
             }
@@ -40,9 +55,9 @@ contactApp.controller('contactController', ['$scope', '$auth', function($scope, 
                 item.editZone = false;
             }
         });
-    };
+    }
 
-    $scope.canEdit = function(contact) {
+    function canEdit(contact) {
         const user = Meteor.user();
         let sameUser = false;
 
@@ -53,4 +68,4 @@ contactApp.controller('contactController', ['$scope', '$auth', function($scope, 
         return sameUser;
     }
 
-}]);
+}

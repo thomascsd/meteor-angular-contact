@@ -1,22 +1,37 @@
 'use strict';
+/*global angular*/
 
-let app = angular.module('contactApp');
+angular
+    .module('contactApp')
+    .controller('mainController', mainController)
+    .controller('loginController', loginController);
 
-app.controller('mainController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
-    $scope.openDialog = function() {
+mainController.$inject = ['$scope', '$mdDialog'];
+loginController.$inject = ['$scope', '$mdDialog'];
+
+function mainController($scope, $mdDialog) {
+    const vm = this;
+
+    vm.openDialog = openDialog;
+    vm.logout = logout;
+
+    function openDialog() {
         $mdDialog.show({
             templateUrl: 'client/views/login.html',
             controller: 'loginController'
         });
     }
 
-    $scope.logout = function() {
-        Meteor.logout();
+    function logout() {
+        $scope.$apply(function() {
+            Meteor.logout();
+        });
+
     }
 
-}]);
+}
 
-app.controller('loginController', ['$scope', '$mdDialog', function($scope, $mdDialog) {
+function loginController($scope, $mdDialog) {
     $scope.login = function(e, user) {
         e.preventDefault();
         Meteor.loginWithPassword(user.username, user.password, () => $mdDialog.hide());
@@ -25,4 +40,4 @@ app.controller('loginController', ['$scope', '$mdDialog', function($scope, $mdDi
     $scope.closeDialog = function() {
         $mdDialog.hide();
     };
-}]);
+}
