@@ -16,12 +16,11 @@ random
 ejson
 spacebars
 check
-angular
 msavin:mongol
-angular:angular-messages
-angular:angular-material
 accounts-password
 angular-meteor-auth
 standard-minifier-css
 standard-minifier-js
 modules
+angular-templates
+pbastowski:angular-babel

@@ -1,0 +1,15 @@
+{
+  "name": "meteor-angular-contact",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "Meteorjs",
+    "Angularjs"
+  ],
+  "author": "thomascsd808@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-meteor": "^1.3.10"
+  }
+}
