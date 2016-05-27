@@ -1,5 +1,6 @@
 import angular from 'angular';
-
+import ngMessages from 'angular-messages';
+import ngMaterial from 'angular-material';
 
 angular.module('contactApp', ['angular-meteor', 'angular-meteor.auth', 'ngMessages', 'ngMaterial'])
     .config(['$mdThemingProvider', '$mdIconProvider', function($mdThemingProvider, $mdIconProvider) {

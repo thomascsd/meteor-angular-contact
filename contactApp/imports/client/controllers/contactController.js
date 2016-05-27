@@ -1,6 +1,8 @@
+import angular from 'angular';
+import { Contacts } from '../../models/contacts';
+
 'use strict';
-/*global angular*/
-/*global contacts*/
+
 
 angular
     .module('contactApp')

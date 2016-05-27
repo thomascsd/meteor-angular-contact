@@ -1,4 +1,6 @@
 'use strict';
+import angular from 'angular';
+import { Contacts } from '../../models/contacts';
 
 let contactApp = angular.module('contactApp');
 

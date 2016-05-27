@@ -1,4 +1,8 @@
 'use strict';
+import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
+import { Contacts } from '../models/contacts';
+
 
 Meteor.methods({
     'insertContact': function(contact) {

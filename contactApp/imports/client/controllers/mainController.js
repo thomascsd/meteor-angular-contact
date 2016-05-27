@@ -1,5 +1,5 @@
 'use strict';
-/*global angular*/
+import angular from 'angular';
 
 angular
     .module('contactApp')
