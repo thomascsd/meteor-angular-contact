@@ -1,5 +1,5 @@
 import angular from 'angular';
-import { Contacts } from '../../models/contacts';
+import { Contacts } from '../../imports/models/contacts';
 
 'use strict';
 

@@ -1,7 +1,7 @@
 'use strict';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Contacts } from '../models/contacts';
+import { Contacts } from '../imports/models/contacts';
 
 
 Meteor.methods({
