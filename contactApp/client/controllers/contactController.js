@@ -1,5 +1,5 @@
 import angular from 'angular';
-import { Contacts } from '../../imports/models/contacts';
+import { Contact } from '../../imports/models/contacts';
 
 'use strict';
 
@@ -17,7 +17,7 @@ function contactController($scope, $auth, $reactive) {
     vm.contact = {};
     vm.subscribe('contact');
     vm.helpers({
-        contacts: () => Contacts.find({})
+        contacts: () => Contact.find()
     });
 
     vm.add = add;
@@ -35,7 +35,7 @@ function contactController($scope, $auth, $reactive) {
     function update(e, contact) {
         e.preventDefault();
         Meteor.call('updateContact', {
-            id: contact._id,
+            contactId: contact.contactId,
             name: contact.name,
             email: contact.email,
             age: contact.age
@@ -50,7 +50,7 @@ function contactController($scope, $auth, $reactive) {
 
         //contact.editZone = true;
         angular.forEach(vm.contacts, function(item) {
-            if (contact._id === item._id) {
+            if (contact.contactId === item.contactId) {
                 item.editZone = true;
             }
             else {

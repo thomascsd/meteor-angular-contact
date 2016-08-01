@@ -1,43 +1,54 @@
 'use strict';
-import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
-import { Contacts } from '../imports/models/contacts';
+import {
+    Meteor
+}
+from 'meteor/meteor';
+import {
+    check
+}
+from 'meteor/check';
+import {
+    Contact
+}
+from '../imports/models/contacts';
 
 
 Meteor.methods({
-    'insertContact': function(contact) {
-        check(contact, {
+    'insertContact': function(data) {
+        check(data, {
             contactName: String,
             email: String,
             age: Number
         });
 
-        Contacts.insert({
-            name: contact.contactName,
-            email: contact.email,
-            age: contact.age
+        var contact = new Contact({
+            name: data.contactName,
+            email: data.email,
+            age: data.age
         });
 
+        contact.save()
+
         Accounts.createUser({
-            username: contact.contactName,
-            email: contact.email,
+            username: data.contactName,
+            email: data.email,
             password: 'b12345'
         });
     },
-    'updateContact': function(contact) {
-        check(contact, {
-            id: String,
+    'updateContact': function(data) {
+        check(data, {
+            contactId: String,
             name: String,
             email: String,
             age: Number
         });
 
-        Contacts.update(contact.id, {
-            $set: {
-                name: contact.name,
-                email: contact.email,
-                age: contact.age
-            }
-        });
+        var contact = Contact.findOne(data.contactId);
+
+        contact.name = data.name;
+        contact.age = data.age;
+        contact.email = data.email;
+
+        contact.save();
     }
 });

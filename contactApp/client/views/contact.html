@@ -21,7 +21,7 @@
             </div>
             <md-content ng-show="ct.editZone" layout-padding>
               <form action="#" method="post" ng-submit="vm.update($event, editContact)">
-                <input type="hidden" name="contactId" id="contactId" ng-model="vm.editContact._id"/>
+                <input type="hidden" name="contactId" id="contactId" ng-model="vm.editContact.contactId"/>
                 <md-input-container>
                   <label for="contactName">Name</label>
                   <input type="text" name="contactName" id="contactName" class="form-control" ng-model="vm.editContact.name"/>
