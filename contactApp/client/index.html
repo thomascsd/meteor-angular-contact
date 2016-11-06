@@ -4,14 +4,14 @@
 </head>
 
 <body layout="column" ng-app="contactApp">
-    <md-toolbar class="md-medium-tall" flex ng-controller="mainController">
+    <md-toolbar class="md-medium-tall" flex ng-controller="mainController as vm">
         <div class="md-toolbar-tools">
             <h2>Contact</h2>
             <span flex></span>
-            <md-button ng-click="openDialog()" ng-show="!$auth.currentUser">
+            <md-button ng-click="vm.openDialog()" ng-show="!$auth.currentUser">
                 Login
             </md-button>
-            <md-button ng-click="logout()" ng-show="$auth.currentUser">
+            <md-button ng-click="vm.logout()" ng-show="$auth.currentUser">
                 Logout
             </md-button>
         </div>
